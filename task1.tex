@@ -4,9 +4,44 @@
 \usepackage[T2A]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage[russian]{babel}
+\usepackage{alltt}
+\usepackage[T2A]{fontenc}
+%\usepackage[koi8-r]{inputenc}
+
+\usepackage[usenames,dvipsnames]{color}
+
+\usepackage{alltt}
 
 \begin{document}
 	
-\section{Введение} 
-	
+\section{Исходный фрагмент и описание информационной структуры} 
+В качестве условия задачи выступает фрагмент программы на языке C, листинг которой приведён
+в Приложении 1. Требовалось выполнить исследование информационной структуры этого
+фрагмента, то есть выявить имеющиеся в ней зависимости по данным и их характер, после чего
+составить описание информационной структуры на языке разметки Algolang. Итоговый листинг
+описания структуры фрагмента на языке Algolang получился вот таким:
+
+\section{Приложение 1}
+Листинг исходного фрагмента на C
+
+
+\begin{verbatim}
+
+1 for(i = 2; i <= n+1; ++i)
+2   C[i] = C[i - 1] + D[i];
+3 for(i = 2; i <= n+1; ++i)
+4   for(j = 2; j <= m+1; ++j)
+5     B[i][j] = B[i + 1][j];
+6 for(i = 2; i <= n+1; ++i){
+7   A[i][1][1]= B[i][m + 1] + C[i];
+8   for(j = 2; j <= m+1; ++j){
+9 	  for(k = 1; k <= n; ++k)
+10 	    A[i][j][k] = A[i - 1][j][k - 1] + A[i][j][k];
+11 	}
+12 }
+\end{verbatim}
+
+
+
+     	
 \end{document}
