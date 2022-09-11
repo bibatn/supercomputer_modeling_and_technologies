@@ -12,6 +12,8 @@
 
 \usepackage{alltt}
 
+\usepackage{listings}
+
 \begin{document}
 	
 \section{Исходный фрагмент и описание информационной структуры} 
@@ -20,6 +22,49 @@
 фрагмента, то есть выявить имеющиеся в ней зависимости по данным и их характер, после чего
 составить описание информационной структуры на языке разметки Algolang. Итоговый листинг
 описания структуры фрагмента на языке Algolang получился вот таким:
+
+\lstset{language=XML}
+\begin{lstlisting}
+<?xml version = "1.0" encoding = "UTF-8"?>
+<algo>
+	<params>
+		<param name = "N" type = "int" value = "5"></param>
+		<param name = "M" type = "int" value = "4"></param>
+	</params>
+		<block id = "0" dims = "1">
+		<arg name = "i" val = "3..N+1"></arg>
+		<vertex condition = "" type = "1">
+			<in src = "i"></in>
+		</vertex>
+	</block>
+	<block id = "1" dims = "1">
+		<arg name = "i" val = "2..N+1"></arg>
+		<vertex condition = "" type = "1">
+			<in src = "i - 1"></in>
+			<in bsrc = "0" src = "i"></in>
+		</vertex>
+	</block>
+	<block id = "2" dims = "2">
+		<arg name = "i" val = "2..N+1"></arg>
+		<arg name = "j" val = "2..M+1"></arg>
+		<vertex condition = "" type = "1">
+			<in src = "i + 1, j"></in>
+		</vertex>
+	</block>
+	<block id = "3" dims = "3">
+		<arg name = "i" val = "2..N+1"></arg>
+		<arg name = "j" val = "1..M+1"></arg>
+		<arg name = "k" val = "1..N-1"></arg>
+		<vertex condition = "(j == 1) and (k == 1)" type = "1">
+			<in bsrc = "2" src = "i,M+1"></in>
+			<in bsrc = "1" src = "i"></in>
+		</vertex>
+		<vertex condition = "(j>1)" type = "1">
+			<in src = "i-1,j,k-1"></in>
+		</vertex>
+	</block>
+</algo>
+\end{lstlisting}
 
 \section{Приложение 1}
 Листинг исходного фрагмента на C
